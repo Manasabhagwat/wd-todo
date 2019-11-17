@@ -13,8 +13,6 @@ public class TaskService {
     @Autowired
     private TaskRepository repository;
 
-    private static Long idCounter = 1L;
-
     public List<Task> getAll(String sort) {
         return repository.findAll().stream()
                 .sorted(Comparator.comparing(sort.equals("name") ? Task::getName : Task::getDate))
@@ -26,12 +24,14 @@ public class TaskService {
     }
 
     public Task create(Task newTask) {
-        newTask.setId(idCounter);
-        idCounter++;
         return repository.save(newTask);
     }
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public Task update(Task updatedTask) {
+        return repository.save(updatedTask);
     }
 }
