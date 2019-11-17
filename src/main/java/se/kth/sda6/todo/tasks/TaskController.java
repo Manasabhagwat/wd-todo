@@ -15,8 +15,18 @@ public class TaskController {
 
     // Get a list of all the tasks
     @GetMapping("")
-    public List<Task> getAll(@RequestParam String sort) {
-        return taskService.getAll(sort);
+    public List<Task> getAll(
+            @RequestParam(required = false) String sort,
+            @RequestParam(required = false) Long projectId) {
+        if (sort == null) {
+            sort = "name";
+        }
+
+        if (projectId == null) {
+            return taskService.getAll(sort);
+        } else {
+            return taskService.getAllByProjectId(projectId);
+        }
     }
 
     // Get a specific task by it's id

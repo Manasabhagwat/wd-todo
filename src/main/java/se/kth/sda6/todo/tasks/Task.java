@@ -1,6 +1,8 @@
 package se.kth.sda6.todo.tasks;
 
 
+import se.kth.sda6.todo.projects.Project;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,13 +19,17 @@ public class Task {
     @Column(name = "date")
     private String date;
 
+    @ManyToOne()
+    private Project project;
+
     public Task() {
     }
 
-    public Task(Long id, String name, String date) {
+    public Task(Long id, String name, String date, Project project) {
         this.id = id;
         this.name = name;
         this.date = date;
+        this.project = project;
     }
 
     public Long getId() {
@@ -48,5 +54,13 @@ public class Task {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

@@ -34,4 +34,8 @@ public class TaskService {
     public Task update(Task updatedTask) {
         return repository.save(updatedTask);
     }
+
+    public List<Task> getAllByProjectId(Long projectId) {
+        return repository.findAllByProjectId(projectId);
+    }
 }
